@@ -1,0 +1,36 @@
+server:
+  port: 8000
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: gateway-service
+
+  main:
+    allow-bean-definition-overriding: true
+
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+        namespace: dev-xyj
+      config:
+        # 配置中心地址
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+        namespace: dev-xyj
+        # 配置文件格式
+        file-extension: yml
+        refresh: true
+        # 共享配置
+      shared-configs[0]:
+        data-id: application-dev.yml
+        # 默认为DEFAULT_GROUP
+        group: DEFAULT_GROUP
+        refresh: true
+

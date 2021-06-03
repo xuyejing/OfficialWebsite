@@ -1,0 +1,52 @@
+server:
+  port: 8001
+
+
+spring:
+  profiles:
+    # 环境配置
+    active: dev
+
+  application:
+    name: official-website-service
+  main:
+    allow-bean-definition-overriding: true
+  #数据源
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/official_website?serverTimezone=GMT%2B8&characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+    username: root
+    password: root
+
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+        namespace: dev-xyj
+      config:
+        # 配置中心地址
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+        namespace: dev-xyj
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs[0]:
+          data-id: application-dev.yml
+          # 默认为DEFAULT_GROUP
+          group: DEFAULT_GROUP
+          refresh: true
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  type-aliases-package: com.springcloud.entities
+logging:
+  level:
+    mapper=DEBUG:
+
+
